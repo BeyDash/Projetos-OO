@@ -1,0 +1,116 @@
+class Ponto:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+class Retangulo:
+    def __init__(self, pontoSuperiorEsquerdo, pontoInferiorDireito):
+        self.pontoSuperiorEsquerdo = pontoSuperiorEsquerdo
+        self.pontoInferiorDireito = pontoInferiorDireito
+
+class Circulo:
+    def __init__(self, centro, raio):
+        self.centro = centro
+        self.raio = raio
+
+# Lista para armazenar as formas geométricas
+FormasGeometricas = []
+
+# Função para criar um ponto
+def CriarPonto(x, y):
+    ponto = Ponto(x, y)
+    return ponto
+
+# Função para criar um retângulo
+def CriarRetangulo(pontoSuperiorEsquerdo, pontoInferiorDireito):
+    retangulo = Retangulo(pontoSuperiorEsquerdo, pontoInferiorDireito)
+    return retangulo
+
+# Função para criar um círculo
+def CriarCirculo(centro, raio):
+    circulo = Circulo(centro, raio)
+    return circulo
+
+# Função para adicionar uma forma geométrica à lista
+def AdicionarFormaGeometrica(forma):
+    FormasGeometricas.append(forma)
+
+# Função para calcular a área de um retângulo
+def CalcularAreaRetangulo(retangulo):
+    base = retangulo.pontoInferiorDireito.x - retangulo.pontoSuperiorEsquerdo.x
+    altura = retangulo.pontoSuperiorEsquerdo.y - retangulo.pontoInferiorDireito.y
+    area = base * altura
+    return area
+
+# Função para calcular a área de um círculo
+def CalcularAreaCirculo(circulo):
+    area = 3.14159 * circulo.raio * circulo.raio
+    return area
+
+# Função principal do programa
+def Principal():
+    while True:
+        print("Escolha uma opção:")
+        print("1. Adicionar um ponto")
+        print("2. Adicionar um retângulo")
+        print("3. Adicionar um círculo")
+        print("4. Calcular a área de uma forma geométrica")
+        print("5. Sair")
+
+        opcao = int(input())
+
+        if opcao == 1:
+            print("Digite as coordenadas do ponto (x y):")
+            x = float(input())
+            y = float(input())
+            ponto = CriarPonto(x, y)
+            AdicionarFormaGeometrica(ponto)
+
+        elif opcao == 2:
+            print("Digite as coordenadas do ponto superior esquerdo do retângulo (x y):")
+            x1 = float(input())
+            y1 = float(input())
+            pontoSuperiorEsquerdo = CriarPonto(x1, y1)
+            print("Digite as coordenadas do ponto inferior direito do retângulo (x y):")
+            x2 = float(input())
+            y2 = float(input())
+            pontoInferiorDireito = CriarPonto(x2, y2)
+            retangulo = CriarRetangulo(pontoSuperiorEsquerdo, pontoInferiorDireito)
+            AdicionarFormaGeometrica(retangulo)
+
+        elif opcao == 3:
+            print("Digite as coordenadas do centro do círculo (x y):")
+            x = float(input())
+            y = float(input())
+            centro = CriarPonto(x, y)
+            print("Digite o raio do círculo:")
+            raio = float(input())
+            circulo = CriarCirculo(centro, raio)
+            AdicionarFormaGeometrica(circulo)
+
+        elif opcao == 4:
+            if not FormasGeometricas:
+                print("A lista de formas geométricas está vazia.")
+            else:
+                print("Escolha uma forma geométrica (0 para a primeira, 1 para a segunda, etc.):")
+                indice = int(input())
+                if 0 <= indice < len(FormasGeometricas):
+                    forma = FormasGeometricas[indice]
+                    if isinstance(forma, Retangulo):
+                        area = CalcularAreaRetangulo(forma)
+                        print(f"A área do retângulo é: {area}")
+                    elif isinstance(forma, Circulo):
+                        area = CalcularAreaCirculo(forma)
+                        print(f"A área do círculo é: {area}")
+                else:
+                    print("Índice inválido.")
+
+        elif opcao == 5:
+            print("Programa encerrado.")
+            break
+
+        else:
+            print("Opção inválida. Tente novamente.")
+
+# Executar a função principal
+Principal()
