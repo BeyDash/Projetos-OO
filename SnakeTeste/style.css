@@ -1,0 +1,13 @@
+body {
+    background-color: #FFF; /* Cor de fundo para o restante da página (branco, no exemplo) */
+    margin: 0;
+    overflow: hidden; /* Isso impede que a barra de rolagem apareça quando a tela é pequena */
+}
+
+#snakeCanvas {
+    background-color: #000; /* Cor desejada para a área do jogo (preto, no exemplo) */
+    display: block;
+    margin: 0 auto; /* Isso centraliza o canvas na página, se necessário */
+}
+
+/* Adicione outros estilos conforme necessário */
