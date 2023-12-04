@@ -20,7 +20,7 @@ body {
   
 #snakeCanvas {
     background-color: #000; /* Cor desejada para a área do jogo (preto, no exemplo) */
-    display: block;
+    display: none;
     margin: 0 auto; /* Isso centraliza o canvas na página, se necessário */
 }
 
