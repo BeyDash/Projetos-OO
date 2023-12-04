@@ -104,6 +104,7 @@ class SnakeGame {
         this.direction = "right";
         document.getElementById("playMenu").style.display = "block";
         document.getElementById("gameOverMessage").style.display = "none";
+        snakeCanvas.style.display = "none";
         this.nameInputDisplayed = false; // Reinicia o controle para exibir o nome
     }
 
@@ -161,6 +162,7 @@ function startGame() {
     leaderboard.style.display = "none";
     leaderboardList.style.display = "none";
     playMenu.style.display = "none";
+    snakeCanvas.style.display = "block";
     document.addEventListener("keydown", handleKeyPress);
     gameLoop();
 }
