@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+<body>
+    <h1>Pagina de registro</h1>
+
+    <form method="post">
+        <div class="username">
+            <label for="username">Username:</label>
+            <input id="username" type="text">
+        </div>
+
+        <div class="password">
+            <label for="password">Senha:</label>
+            <input id="password" type="text">
+        </div>
+
+        <button id="registerButton" type="submit">Cadastrar</button>
+    </form>
+
+
+
+    <script type="module">
+        document.addEventListener("DOMContentLoaded", async function () {
+            const module = await import('./services/register.js')
+            const { register } = module;
+            window.register = register
+
+
+            document.getElementById('registerButton').addEventListener('click', function() {
+            // Obtenha os valores dos campos de entrada
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            register(username, password)
+        });
+        });
+    </script>
+</body>
+</html>

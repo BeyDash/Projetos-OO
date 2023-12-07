@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style.css">
     <title>Snake Game</title>
 </head>
+
 <body>
     <!-- Adicione um botão "Leaderboard" no menu -->
     <p id="gameOverMessage" style="display: none;"></p>
 
     <div id="title">
         <h1>Snake Game</h1>
-      </div>
+    </div>
 
-      <div id="playMenu">
+    <div id="playMenu">
         <button onclick="startGame()">Play</button>
         <button onclick="toggleLeaderboard()">Leaderboard</button>
-        <button onclick="login()">Login</button> <!-- Added login button -->
+        <button onclick="goToRegisterPage()">Register</button> <!-- Added login button -->
         <p id="score"></p>
     </div>
-    
+
     <div id="leaderboard" style="display: none;">
         <button onclick="toggleLeaderboard()">Back</button>
         <p>Leaderboard:</p>
@@ -28,19 +30,23 @@
     </div>
 
 
-<canvas id="game"></canvas>
-<canvas id="snakeCanvas" width="400" height="400"></canvas>
+    <canvas id="game"></canvas>
+    <canvas id="snakeCanvas" width="400" height="400"></canvas>
 
-<script type="module">
-    document.addEventListener("DOMContentLoaded", function() {
-        import('./game.js').then((module) => {
-            const { startGame, toggleLeaderboard } = module;
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="module">
+        document.addEventListener("DOMContentLoaded", async function () {
+            const module = await import('./game.js')
+            const { startGame, toggleLeaderboard, goToRegisterPage } = module;
             // Expose functions globally for onclick
             window.startGame = startGame;
             window.toggleLeaderboard = toggleLeaderboard
+            // window.fetchData = fetchData
+            window.goToRegisterPage = goToRegisterPage
+
         });
-    });
-</script>
+    </script>
 
 </body>
+
 </html>

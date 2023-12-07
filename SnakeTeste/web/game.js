@@ -52,3 +52,8 @@ function gameLoop() {
 
     setTimeout(gameLoop, 200);
 }
+
+export async function goToRegisterPage() {
+    window.location.href = './register.html';
+};
+
