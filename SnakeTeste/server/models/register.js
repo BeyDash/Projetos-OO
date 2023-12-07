@@ -2,39 +2,30 @@ import Database from "./database.js";
 
 export default class Register {
 
-    constructor(username, password) {
-        this.users = []
-        // this.isLoggedIn = false
-        this.username = username
-        this.password = password
-
-        this.register()
+    constructor(){
+        this.db = new Database('./database/users.json')
+        this.currentUsers = this.db.list()
     }
 
-    register() {
-        // instantiate database
-        const db = new Database('./database/users.json')
 
-        // Check if the username already exists
-        // const existingUser = this.users.find(user => user.username === username);
-        // if (existingUser) {
-        //     console.log('Username already exists. Please choose a different one.');
+    register(username, password) {
+        console.log("\nREGISTER USER \n: ")
+        const userNameExists = this.checkIfUserNameExists(username)
 
-        //     // Use a recursive aproach
-        //     this.register();
-        // }
-
-        // Add the new user to the list
-        const newUser = { 
-            username: this.username, 
-            password: this.password 
+        if(userNameExists){
+            throw new Error("Username is already taken")
         }
 
-        this.users.push(newUser);
+        // Add the new user to the list
+        const newUser = { username, password }
+
+        this.currentUsers.push(newUser);
 
         // Save the updated user list to a JSON file
-        db.saveToJson(this.users)
-        console.log('Registration successful! You can now log in.');
+        this.db.saveToJson(this.currentUsers)
     }
 
+    checkIfUserNameExists(username){
+        return this.currentUsers.find(user => user.username === username)
+    }
 }
