@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
 </head>
+
 <body>
     <h1>Pagina de registro</h1>
 
@@ -19,26 +21,27 @@
             <input id="password" type="text">
         </div>
 
-        <button id="registerButton" type="submit">Cadastrar</button>
+        <button id="registerButton">Cadastrar</button>
     </form>
 
-
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="./js/main.js"></script>
     <script type="module">
         document.addEventListener("DOMContentLoaded", async function () {
-            const module = await import('./services/register.js')
-            const { register } = module;
+            const module = await import('./js/services/register.js');
+            const { register } = module
             window.register = register
 
+            document.getElementById('registerButton').addEventListener('click', function () {
+                event.preventDefault()
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
 
-            document.getElementById('registerButton').addEventListener('click', function() {
-            // Obtenha os valores dos campos de entrada
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            register(username, password)
-        });
+                register(username, password);
+            });
         });
     </script>
 </body>
+
 </html>

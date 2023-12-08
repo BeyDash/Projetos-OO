@@ -17,9 +17,9 @@
     </div>
 
     <div id="playMenu">
-        <button onclick="startGame()">Play</button>
+        <button id="startGameButton">Play</button>
         <button onclick="toggleLeaderboard()">Leaderboard</button>
-        <button onclick="goToRegisterPage()">Register</button> <!-- Added login button -->
+        <button id="goToRegisterPageButton">Register</button> <!-- Added login button -->
         <p id="score"></p>
     </div>
 
@@ -29,24 +29,22 @@
         <ul id="leaderboardList"></ul>
     </div>
 
-
     <canvas id="game"></canvas>
     <canvas id="snakeCanvas" width="400" height="400"></canvas>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="module" src="./js/main.js"></script>
     <script type="module">
         document.addEventListener("DOMContentLoaded", async function () {
-            const module = await import('./game.js')
+            const module = await import('./js/main.js');
             const { startGame, toggleLeaderboard, goToRegisterPage } = module;
-            // Expose functions globally for onclick
-            window.startGame = startGame;
-            window.toggleLeaderboard = toggleLeaderboard
-            // window.fetchData = fetchData
-            window.goToRegisterPage = goToRegisterPage
 
+            // Adicione event listeners aos botões
+            document.getElementById('startGameButton').addEventListener('click', startGame);
+            window.toggleLeaderboard = toggleLeaderboard
+            document.getElementById('goToRegisterPageButton').addEventListener('click', goToRegisterPage);
         });
     </script>
-
 </body>
 
 </html>

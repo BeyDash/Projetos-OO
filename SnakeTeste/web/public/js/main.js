@@ -5,6 +5,7 @@ const playMenu = document.getElementById("playMenu");
 const leaderboard = document.getElementById("leaderboard");
 const leaderboardList = document.getElementById("leaderboardList");
 const game = new SnakeGame(canvas);
+console.log(game);
 
 export function startGame() {
     leaderboard.style.display = "none";
@@ -16,6 +17,7 @@ export function startGame() {
 }
 
 export function toggleLeaderboard() {
+    console.log("TOGGLE");
     playMenu.style.display = playMenu.style.display === "none" ? "block" : "none";
     leaderboard.style.display = leaderboard.style.display === "none" ? "block" : "none";
     leaderboardList.style.display = leaderboard.style.display;
