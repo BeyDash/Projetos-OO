@@ -84,16 +84,32 @@ export class SnakeGame {
     }
 
     endGame() {
-        const playerName = prompt("Game Over! Enter your name for the leaderboard:");
+        let scoreData = { score: this.score };
+        let username = localStorage?.getItem('userData')
 
-        if (playerName !== null) {
-            const scoreData = { name: playerName, score: this.score };
+        const leaderBoard = localStorage.getItem('leaderboardData')
+        if (!leaderBoard) {
+            localStorage.setItem('leaderboardData', JSON.stringify([]))
+        }
+
+        if (username) {
+            scoreData.name = username
+        } else {
+            username = prompt("Game Over! Escreva seu nome para o leaderboard:");
+
+            while (leaderBoard?.findIndex(user => user.name === username)) {
+                username = prompt("Esse nome já está registrado no leaderBoard, tente outro nick, ou cadastre-se na plataforma e faça login para ter seu score salvo sempre :)");
+            }
+        }
+
+        if (username) {
             this.addToLeaderboard(scoreData);
             this.updateLeaderboardUI();
+            alert("Adicionado ao leaderboard! Clique no botão para consulta-lo")
         }
 
         document.getElementById("gameOverMessage").textContent = `Game Over! Your score: ${this.score}`;
-        document.getElementById("gameOverMessage").style.display = "block";
+        // document.getElementById("gameOverMessage").style.display = "block";
         this.resetGame();
     }
 
@@ -112,32 +128,52 @@ export class SnakeGame {
         let leaderboardData = localStorage.getItem("leaderboardData");
         leaderboardData = leaderboardData ? JSON.parse(leaderboardData) : [];
 
-        leaderboardData.push(scoreData);
-        leaderboardData.sort((a, b) => b.score - a.score);
+        const userInLeaderBoard = leaderboardData.findIndex(user => user.name === scoreData.name);
 
+        if (userInLeaderBoard >= 0) {
+            const score = leaderboardData[userInLeaderBoard].score
+            const updateScore = this.shouldUpdateScore(score, scoreData.score)
+
+            if (updateScore) {
+                leaderboardData[userInLeaderBoard].score = scoreData.score
+            }
+        } else {
+            leaderboardData.push(scoreData);
+        }
+
+        leaderboardData.sort((a, b) => b.score - a.score);
         localStorage.setItem("leaderboardData", JSON.stringify(leaderboardData));
+    }
+
+    shouldUpdateScore(score, newScore) {
+        if (newScore > score) {
+            return true
+        }
+
+        return false
     }
 
     updateLeaderboardUI() {
 
         const leaderboardList = document.getElementById("leaderboardList");
         leaderboardList.innerHTML = "";
-      
+
         const leaderboardData = JSON.parse(localStorage.getItem("leaderboardData")) || [];
-        
+
         // Only show top 10 scores
         const top10 = leaderboardData.slice(0, 10);
-      
+
+        // aqui
         top10.forEach(score => {
-          const li = document.createElement("li");
-          li.textContent = `${score.name} - ${score.score}`;
-      
-          leaderboardList.appendChild(li);
+            const li = document.createElement("li");
+            li.textContent = `${score.name} - ${score.score}`;
+
+            leaderboardList.appendChild(li);
         });
-      
-      }
-      
-    
+
+    }
+
+
     showLeaderboard() {
         playMenu.style.display = "none";
         leaderboard.style.display = "block";
