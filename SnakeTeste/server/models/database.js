@@ -33,7 +33,6 @@ export default class Database {
       return this.data;
       
     } catch (error) {
-      // 
       console.log(error);
     }
   }
@@ -41,7 +40,7 @@ export default class Database {
   update(username, updates) {
     // Find the user by username
     const userToUpdate = this.list(username)
-    console.log(userToUpdate);
+
     // If the user is found, update the specified keys
     if (userToUpdate) {
       for (const key in updates) {

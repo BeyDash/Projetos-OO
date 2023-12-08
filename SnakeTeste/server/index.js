@@ -2,6 +2,7 @@ import Register from "./models/register.js"
 import express from 'express'
 import cors from 'cors'
 import { Score } from "./models/score.js"
+import { Login } from "./models/login.js"
 
 const app = express()
 app.use(express.json())
@@ -44,6 +45,23 @@ app.put('/update-score', (req, res) => {
         return res.status(400).send(error.message)
     }
 })
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body
+
+    try {
+        new Login(username, password)
+        return res.status(200).send(JSON.stringify({
+            message: "User successfully logged in"
+        }))
+    } catch (error) {
+        // TODO: CHECK IF IT SHOULD BE 400
+        return res.status(404).send({
+            message: error.message
+        })
+    }
+})
+
 
 
 app.listen(2001, () => {
