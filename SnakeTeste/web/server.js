@@ -17,6 +17,10 @@ app.post('/register.html', (req, res) => {
     res.sendFile(join(__dirname, 'public', 'register.html'));
 });
 
+app.post('/login.html', (req, res) => {
+    res.sendFile(join(__dirname, 'public', 'login.html'));
+});
+
 // Configuração para lidar com requisições para outros arquivos (por exemplo, JavaScript)
 app.get('/js/*', (req, res) => {
     res.sendFile(join(__dirname, 'public', req.url));

@@ -1,0 +1,62 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+    <h1>Login</h1>
+
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button id="login" type="submit">Login</button>
+    </form>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="module">
+        document.addEventListener("DOMContentLoaded", async function () {
+            const module = await import('./js/services/login.js');
+            const { login } = module;
+
+            document.getElementById('login').addEventListener('click', async function () {
+                event.preventDefault()
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                await login(username, password);
+            });
+
+        });
+    </script>
+
+    <script type="module">
+        document.addEventListener("DOMContentLoaded", async function () {
+            const module = await import('./js/services/login.js');
+            const { login } = module;
+
+            const loginForm = document.getElementById('loginForm');
+
+            loginForm.addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                await login(username, password)
+            });
+        });
+
+    </script>
+</body>
+
+</html>

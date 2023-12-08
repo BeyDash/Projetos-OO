@@ -32,13 +32,13 @@
             const { register } = module
             window.register = register
 
-            document.getElementById('registerButton').addEventListener('click', function () {
+            document.getElementById('registerButton').addEventListener('click', async function () {
                 event.preventDefault()
                 
                 const username = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
 
-                register(username, password);
+                await register(username, password);
             });
         });
     </script>
