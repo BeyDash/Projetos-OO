@@ -1,15 +1,12 @@
 import Database from "./database.js";
 
 export default class Register {
-
-    constructor(){
-        this.db = new Database('./database/users.json')
+    constructor(filePath){
+        this.db = new Database(filePath)
         this.currentUsers = this.db.list()
     }
 
-
     register(username, password) {
-        console.log("\nREGISTER USER \n: ")
         const userNameExists = this.checkIfUserNameExists(username)
 
         if(userNameExists){

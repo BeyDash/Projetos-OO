@@ -21,6 +21,7 @@
         <button id="goToRegisterPageButton">Register</button>
         <p id="score"></p>
         <button onclick="login()" id="loginButton">Login</button>
+        <button onclick="logout()" id="logoutButton">Logout</button>
     </div>
 
     <div id="leaderboard" style="display: none;">
@@ -37,12 +38,13 @@
     <script type="module">
         document.addEventListener("DOMContentLoaded", async function () {
             const module = await import('./js/main.js');
-            const { startGame, toggleLeaderboard, goToRegisterPage, goToLoginPage } = module;
+            const { startGame, toggleLeaderboard, goToRegisterPage, goToLoginPage, logout } = module;
 
             // Adicione event listeners aos botões
             document.getElementById('startGameButton').addEventListener('click', startGame);
             window.toggleLeaderboard = toggleLeaderboard
             window.login = goToLoginPage
+            window.logout = logout
             document.getElementById('goToRegisterPageButton').addEventListener('click', goToRegisterPage);
         });
     </script>

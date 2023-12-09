@@ -33,13 +33,11 @@ export default class Database {
       return this.data;
       
     } catch (error) {
-      console.log(error);
     }
   }
 
   update(username, updates) {
-    // Find the user by username
-    const userToUpdate = this.list(username)
+    const userToUpdate = this.list(username);
 
     // If the user is found, update the specified keys
     if (userToUpdate) {
@@ -48,14 +46,23 @@ export default class Database {
           userToUpdate[key] = updates[key];
         }
       }
-
-      // Save the updated data to the JSON file
-      this.saveToJson(this.data);
-      return true; // Indicate successful update
+  
+      // Find the index of the user in the data array
+      const userIndex = this.data.findIndex((user) => user.username == username);
+  
+      // If the user is found in the array, update the array
+      if (userIndex >= 0) {
+        this.data[userIndex] = userToUpdate;
+  
+        // Save the updated data to the JSON file
+        this.saveToJson(this.data);
+        return true; // Indicate successful update
+      }
     }
-
-    throw new Error('Impossible to update user, it was not found in database')
+  
+    // throw new Error('Impossible to update user, it was not found in the database');
   }
+  
 
 
   // TODO: Work on it latter

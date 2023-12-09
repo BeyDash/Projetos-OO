@@ -65,3 +65,9 @@ export async function goToLoginPage() {
     }
     window.location.href = './login.html';
 };
+
+
+export function logout(){
+    window.localStorage.removeItem('userData')
+    alert("Usuário deslogado do sistema")
+}

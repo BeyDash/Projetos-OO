@@ -83,33 +83,29 @@ export class SnakeGame {
         }
     }
 
-    endGame() {
+    async endGame() {
         let scoreData = { score: this.score };
         let username = localStorage?.getItem('userData')
 
         const leaderBoard = localStorage.getItem('leaderboardData')
+
+        // populate leaderboard
         if (!leaderBoard) {
-            localStorage.setItem('leaderboardData', JSON.stringify([]))
+            const dbLeaderBoard = await this.populateLeaderBoard()
+            localStorage.setItem('leaderboardData', JSON.stringify(dbLeaderBoard.data))
         }
 
         if (username) {
-            scoreData.name = username
+            scoreData.username = username
         } else {
-            username = prompt("Game Over! Escreva seu nome para o leaderboard:");
-
-            while (leaderBoard?.findIndex(user => user.name === username)) {
-                username = prompt("Esse nome já está registrado no leaderBoard, tente outro nick, ou cadastre-se na plataforma e faça login para ter seu score salvo sempre :)");
-            }
+            scoreData.username = prompt("Game Over! Escreva seu nome para o leaderboard:");
         }
 
-        if (username) {
-            this.addToLeaderboard(scoreData);
-            this.updateLeaderboardUI();
-            alert("Adicionado ao leaderboard! Clique no botão para consulta-lo")
-        }
+        this.addToLeaderboard(scoreData);
+        this.updateLeaderboardUI();
+        alert("Adicionado ao leaderboard! Clique no botão para consulta-lo")
 
         document.getElementById("gameOverMessage").textContent = `Game Over! Your score: ${this.score}`;
-        // document.getElementById("gameOverMessage").style.display = "block";
         this.resetGame();
     }
 
@@ -124,11 +120,11 @@ export class SnakeGame {
         this.nameInputDisplayed = false; // Reinicia o controle para exibir o nome
     }
 
-    addToLeaderboard(scoreData) {
+    async addToLeaderboard(scoreData) {
         let leaderboardData = localStorage.getItem("leaderboardData");
         leaderboardData = leaderboardData ? JSON.parse(leaderboardData) : [];
 
-        const userInLeaderBoard = leaderboardData.findIndex(user => user.name === scoreData.name);
+        const userInLeaderBoard = leaderboardData.findIndex(user => user.username === scoreData.username);
 
         if (userInLeaderBoard >= 0) {
             const score = leaderboardData[userInLeaderBoard].score
@@ -136,9 +132,13 @@ export class SnakeGame {
 
             if (updateScore) {
                 leaderboardData[userInLeaderBoard].score = scoreData.score
+
+                await this.saveLeaderBoard(scoreData)
+                await this.updateScore(scoreData)
             }
         } else {
             leaderboardData.push(scoreData);
+            await this.saveLeaderBoard(scoreData)
         }
 
         leaderboardData.sort((a, b) => b.score - a.score);
@@ -154,7 +154,6 @@ export class SnakeGame {
     }
 
     updateLeaderboardUI() {
-
         const leaderboardList = document.getElementById("leaderboardList");
         leaderboardList.innerHTML = "";
 
@@ -163,16 +162,40 @@ export class SnakeGame {
         // Only show top 10 scores
         const top10 = leaderboardData.slice(0, 10);
 
-        // aqui
-        top10.forEach(score => {
+       // aqui
+        top10.forEach(user => {
             const li = document.createElement("li");
-            li.textContent = `${score.name} - ${score.score}`;
+            li.textContent = `${user.username} - ${user.score}`;
 
             leaderboardList.appendChild(li);
         });
 
     }
 
+    async saveLeaderBoard(scoreData) {
+        try {
+            await window.axios.post('http://localhost:2001/leaderboard', scoreData)
+        } catch (error) {
+            console.log("Impossivel salvar o leaderboard no banco");
+        }
+
+    }
+
+    async updateScore(scoreData){
+        try {
+            await window.axios.put('http://localhost:2001/update-score', scoreData)
+        } catch (error) {
+            console.log("Impossivel fazer o update do score");
+        }
+    }
+
+    async populateLeaderBoard(){
+        try {
+            return await window.axios.get('http://localhost:2001/leaderboard')
+        } catch (error) {
+            console.log("Impossivel salvar o leaderboard no banco");
+        }
+    }
 
     showLeaderboard() {
         playMenu.style.display = "none";
