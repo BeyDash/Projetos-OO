@@ -9,8 +9,7 @@
 </head>
 
 <body>
-    <!-- Adicione um botão "Leaderboard" no menu -->
-    <p id="gameOverMessage" style="display: none;"></p>
+    <p id="gameOverMessage"></p>
 
     <div id="title">
         <h1>Snake Game</h1>
@@ -19,8 +18,10 @@
     <div id="playMenu">
         <button id="startGameButton">Play</button>
         <button onclick="toggleLeaderboard()">Leaderboard</button>
-        <button id="goToRegisterPageButton">Register</button> <!-- Added login button -->
+        <button id="goToRegisterPageButton">Register</button>
         <p id="score"></p>
+        <button onclick="login()" id="loginButton">Login</button>
+        <button onclick="logout()" id="logoutButton">Logout</button>
     </div>
 
     <div id="leaderboard" style="display: none;">
@@ -37,11 +38,13 @@
     <script type="module">
         document.addEventListener("DOMContentLoaded", async function () {
             const module = await import('./js/main.js');
-            const { startGame, toggleLeaderboard, goToRegisterPage } = module;
+            const { startGame, toggleLeaderboard, goToRegisterPage, goToLoginPage, logout } = module;
 
             // Adicione event listeners aos botões
             document.getElementById('startGameButton').addEventListener('click', startGame);
             window.toggleLeaderboard = toggleLeaderboard
+            window.login = goToLoginPage
+            window.logout = logout
             document.getElementById('goToRegisterPageButton').addEventListener('click', goToRegisterPage);
         });
     </script>

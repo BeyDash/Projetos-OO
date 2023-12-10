@@ -5,7 +5,6 @@ const playMenu = document.getElementById("playMenu");
 const leaderboard = document.getElementById("leaderboard");
 const leaderboardList = document.getElementById("leaderboardList");
 const game = new SnakeGame(canvas);
-console.log(game);
 
 export function startGame() {
     leaderboard.style.display = "none";
@@ -17,7 +16,6 @@ export function startGame() {
 }
 
 export function toggleLeaderboard() {
-    console.log("TOGGLE");
     playMenu.style.display = playMenu.style.display === "none" ? "block" : "none";
     leaderboard.style.display = leaderboard.style.display === "none" ? "block" : "none";
     leaderboardList.style.display = leaderboard.style.display;
@@ -59,3 +57,17 @@ export async function goToRegisterPage() {
     window.location.href = './register.html';
 };
 
+export async function goToLoginPage() {
+    const username = window.localStorage?.getItem('userData')
+    if(username){
+        alert(`Usuário ${username} já logado no sistema. Agora é só dar o play!`)
+        return
+    }
+    window.location.href = './login.html';
+};
+
+
+export function logout(){
+    window.localStorage.removeItem('userData')
+    alert("Usuário deslogado do sistema")
+}
