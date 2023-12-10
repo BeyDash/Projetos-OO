@@ -1,15 +1,16 @@
 # Instruções para Executar o Projeto
 
-Para executar este projeto, é necessário ter o Node.js instalado no seu sistema. Se ainda não o tiver, você pode baixá-lo [aqui](https://nodejs.org/en/download/).
-
-Além disso, você precisa ter o npm (Node Package Manager) ou o Yarn instalados. O npm é incluído automaticamente na instalação do Node.js. Se preferir usar o Yarn, você pode instalá-lo seguindo as instruções [aqui](https://yarnpkg.com/getting-started/install).
+## Pré requisitos para conseguir rodar os comandos a seguir
+- [Node.js](https://nodejs.org/en/download/)
+- npm (geralmente já vem junto na instalação do node)
+- [GIT](https://git-scm.com/book/pt-br/v2/Come%C3%A7ando-Instalando-o-Git)
 
 ## Passos para Executar o Projeto
 
 1. **Clone o Repositório:**
    ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
-   cd nome-do-repositorio
+   git clone https://github.com/BeyDash/Projetos-OO.git
+   cd SnakeTest
    ```
 
 2. **Instale as Dependências do Servidor:**
@@ -25,7 +26,7 @@ Além disso, você precisa ter o npm (Node Package Manager) ou o Yarn instalados
 
 4. **Abra um Novo Terminal e Navegue até o Diretório Web:**
    ```bash
-   cd ../web
+   cd web
    ```
 
 5. **Instale as Dependências da Interface Web:**
