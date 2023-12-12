@@ -1,5 +1,5 @@
 export class SnakeGame {
-    constructor(canvas) {
+    constructor(canvas) { // Construtor que recebe um elemento canvas como parâmetro
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.gridSize = 20;
@@ -9,38 +9,38 @@ export class SnakeGame {
         this.direction = "right";
     }
 
-    generateFood() {
+    generateFood() { // Método para gerar a posição inicial da comida
         const x = Math.floor(Math.random() * (this.canvas.width / this.gridSize));
         const y = Math.floor(Math.random() * (this.canvas.height / this.gridSize));
         return { x, y };
     }
 
-    draw() {
+    draw() {  // Método para desenhar os elementos no canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawSnake();
         this.drawFood();
         this.drawScore();
     }
 
-    drawSnake() {
+    drawSnake() { // Método para desenhar a cobra no canvas
         this.ctx.fillStyle = "#00F";
         this.snake.forEach(segment => {
             this.ctx.fillRect(segment.x * this.gridSize, segment.y * this.gridSize, this.gridSize, this.gridSize);
         });
     }
 
-    drawFood() {
+    drawFood() { // Método para desenhar a comida no canvas
         this.ctx.fillStyle = "#F00";
         this.ctx.fillRect(this.food.x * this.gridSize, this.food.y * this.gridSize, this.gridSize, this.gridSize);
     }
 
-    drawScore() {
+    drawScore() { // Método para desenhar a pontuação no canvas
         this.ctx.fillStyle = "#FFF";
         this.ctx.font = "20px Arial";
         this.ctx.fillText(`Score: ${this.score}`, 10, 30);
     }
 
-    move() {
+    move() { // Método para mover a cobra
         const head = { ...this.snake[0] };
 
         switch (this.direction) {
@@ -60,7 +60,7 @@ export class SnakeGame {
 
         this.snake.unshift(head);
 
-        if (head.x === this.food.x && head.y === this.food.y) {
+        if (head.x === this.food.x && head.y === this.food.y) { // Verificar se a cobra atingiu a comida
             this.score++;
             this.food = this.generateFood();
         } else {
@@ -68,7 +68,7 @@ export class SnakeGame {
         }
     }
 
-    checkCollision() {
+    checkCollision() {  // Método para verificar colisões com as bordas do canvas e consigo mesma
         const head = this.snake[0];
 
         if (head.x < 0 || head.x >= this.canvas.width / this.gridSize ||
@@ -83,7 +83,7 @@ export class SnakeGame {
         }
     }
 
-    async endGame() {
+    async endGame() { // Método assíncrono chamado quando o jogo termina
         let scoreData = { score: this.score };
         let username = localStorage?.getItem('userData')
 
@@ -109,7 +109,7 @@ export class SnakeGame {
         this.resetGame();
     }
 
-    resetGame() {
+    resetGame() { // Método para reiniciar o jogo
         this.snake = [{ x: 5, y: 5 }];
         this.food = this.generateFood();
         this.score = 0;
@@ -120,13 +120,13 @@ export class SnakeGame {
         this.nameInputDisplayed = false; // Reinicia o controle para exibir o nome
     }
 
-    async addToLeaderboard(scoreData) {
+    async addToLeaderboard(scoreData) { // Método para adicionar pontuação ao leaderboard
         let leaderboardData = localStorage.getItem("leaderboardData");
         leaderboardData = leaderboardData ? JSON.parse(leaderboardData) : [];
 
         const userInLeaderBoard = leaderboardData.findIndex(user => user.username === scoreData.username);
 
-        if (userInLeaderBoard >= 0) {
+        if (userInLeaderBoard >= 0) {  // Método para determinar se a pontuação deve ser atualizada no leaderboard
             const score = leaderboardData[userInLeaderBoard].score
             const updateScore = this.shouldUpdateScore(score, scoreData.score)
 
@@ -153,7 +153,8 @@ export class SnakeGame {
         return false
     }
 
-    updateLeaderboardUI() {
+    updateLeaderboardUI() { // Método para atualizar a UI do leaderboard
+
         const leaderboardList = document.getElementById("leaderboardList");
         leaderboardList.innerHTML = "";
 
@@ -172,7 +173,7 @@ export class SnakeGame {
 
     }
 
-    async saveLeaderBoard(scoreData) {
+    async saveLeaderBoard(scoreData) { // Método assíncrono para salvar pontuação no servidor
         try {
             await window.axios.post('http://localhost:2001/leaderboard', scoreData)
         } catch (error) {
@@ -180,8 +181,8 @@ export class SnakeGame {
         }
 
     }
-
-    async updateScore(scoreData){
+ 
+    async updateScore(scoreData){ // Método assíncrono para atualizar pontuação no servidor
         try {
             await window.axios.put('http://localhost:2001/update-score', scoreData)
         } catch (error) {
@@ -189,7 +190,7 @@ export class SnakeGame {
         }
     }
 
-    async populateLeaderBoard(){
+    async populateLeaderBoard(){  // Método assíncrono para popular o leaderboard a partir do servidor
         try {
             return await window.axios.get('http://localhost:2001/leaderboard')
         } catch (error) {
@@ -197,14 +198,14 @@ export class SnakeGame {
         }
     }
 
-    showLeaderboard() {
+    showLeaderboard() {  // Método para exibir o leaderboard na UI
         playMenu.style.display = "none";
         leaderboard.style.display = "block";
         leaderboardList.style.display = "block";
         this.updateLeaderboardUI();
     }
 
-    hideLeaderboard() {
+    hideLeaderboard() {  // Método para ocultar o leaderboard na UI
         leaderboard.style.display = "none";
         playMenu.style.display = "block";
     }
