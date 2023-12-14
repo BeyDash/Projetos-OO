@@ -3,56 +3,87 @@
 <html lang="en">
 
 <head>
+    <!-- Definindo o conjunto de caracteres e a viewport para responsividade da tela -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Importando o arquivo de estilo personalizado para a página de login -->
+    <link rel="stylesheet" href="./styles/login.css">
+
+    <!-- Título da página -->
     <title>Login</title>
 </head>
 
 <body>
-    <h1>Login</h1>
-
+    
+    <!-- Formulário de login -->
     <form id="loginForm">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <!-- Título do formulário -->
+        <h1>Login</h1>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <!-- Campo de entrada para o nome de usuário -->
+        <div class="username">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>    
 
+        <!-- Campo de entrada para a senha -->
+        <div class="password">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <!-- Botão de envio do formulário de login -->
         <button id="login" type="submit">Login</button>
     </form>
 
+    <!-- Importando a biblioteca Axios para requisições HTTP -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Script para carregar o módulo de serviço de login após o carregamento do DOM -->
     <script type="module">
         document.addEventListener("DOMContentLoaded", async function () {
+            // Importando funções específicas do módulo de serviço de login
             const module = await import('./js/services/login.js');
             const { login } = module;
 
+            // Adicionando um event listener ao botão de login usando o método de clique
             document.getElementById('login').addEventListener('click', async function () {
-                event.preventDefault()
-                
+                // Prevenindo o comportamento padrão do formulário para evitar recarregar a página
+                event.preventDefault();
+
+                // Obtendo os valores de nome de usuário e senha dos campos de entrada
                 const username = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
 
+                // Chamando a função de login com os dados fornecidos
                 await login(username, password);
             });
 
         });
     </script>
 
+    <!-- Segundo script para carregar o módulo de serviço de login e adicionar um event listener ao formulário -->
     <script type="module">
         document.addEventListener("DOMContentLoaded", async function () {
+            // Importando funções específicas do módulo de serviço de login
             const module = await import('./js/services/login.js');
             const { login } = module;
 
+            // Obtendo a referência ao formulário de login
             const loginForm = document.getElementById('loginForm');
 
+            // Adicionando um event listener ao formulário de login usando o método de envio
             loginForm.addEventListener('submit', async function (event) {
+                // Prevenindo o comportamento padrão do formulário para evitar recarregar a página
                 event.preventDefault();
 
+                // Obtendo os valores de nome de usuário e senha dos campos de entrada
                 const username = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
 
-                await login(username, password)
+                // Chamando a função de login com os dados fornecidos
+                await login(username, password);
             });
         });
 
