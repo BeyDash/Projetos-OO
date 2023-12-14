@@ -1,0 +1,88 @@
+/* Reset de margens, preenchimentos e modelagem de caixa para todos os elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Definindo a unidade de fonte base para facilitar cálculos de tamanhos em rem */
+  :root {
+    font-size: 62.5%;
+  }
+  
+  /* Definindo a fonte padrão para o corpo do documento, formulários, botões e inputs */
+  body, form, button, input {
+    font-family: "Poppins", sans-serif;
+  }
+  
+  /* Estilo do corpo do documento */
+  body {
+    font-size: 1.6rem; /* Tamanho padrão da fonte */
+    background-image: url(./Assets/background.png); /* Imagem de fundo para o corpo do documento */
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+  }
+  
+  /* Estilo do formulário */
+  form {
+    margin-top: -17rem; /* Desloca para cima para posicionar na tela */
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem; /* Espaço entre os elementos do formulário */
+  }
+  
+  /* Estilo do título do formulário */
+  form h1 {
+    color: #ffffff; /* Cor do texto branco */
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
+  
+  /* Estilo das etiquetas do formulário */
+  form label {
+    color: #ffffff; /* Cor do texto branco */
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Estilo dos campos de entrada do formulário */
+  form input {
+    width: 50rem;
+    height: 4rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    padding-left: 2rem;
+    border: 2px solid #24fb0d; /* Borda verde para os campos de entrada */
+  }
+  
+  /* Estilo dos campos de usuário e senha (usando a classe) */
+  .username, .password {
+    display: grid;
+  }
+  
+  /* Estilo do botão de login */
+  #login {
+    color: #fff; /* Cor do texto branco */
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 800;
+    background: #40DE63; /* Cor de fundo verde */
+    width: 33.6rem;
+    height: 3.8rem;
+    border: none;
+    border-radius: 1.6rem;
+    cursor: pointer;
+    margin-top: 3.6rem;
+    transition: all 0.2s ease-in-out; /* Transição suave de propriedades */
+  }
+  
+  /* Estilo do botão de login ao passar o mouse sobre ele */
+  #login:hover {
+    background: #1eb63f; /* Cor de fundo alterada ao passar o mouse */
+  }
+  

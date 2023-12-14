@@ -2,45 +2,83 @@
 <html lang="en">
 
 <head>
+    <!-- Definindo o conjunto de caracteres e a viewport para responsividade -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Importando a fonte Poppins do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
+
+    <!-- Importando o arquivo de estilo personalizado -->
     <link rel="stylesheet" href="./styles/style.css">
+
+    <!-- Título da página -->
     <title>Snake Game</title>
 </head>
 
 <body>
+    <!-- Parágrafo para exibir mensagem de game over -->
     <p id="gameOverMessage"></p>
 
-    <div id="title">
-        <h1>Snake Game</h1>
-    </div>
+    <main>
+        <!-- Um bloco de Divisão para o título do jogo -->
+        <div id="title">
+            <h1><img src="../public/styles/Assets/Snake_Game_Title.png" alt=""></h1>
+        </div>
 
-    <div id="playMenu">
-        <button id="startGameButton">Play</button>
-        <button onclick="toggleLeaderboard()">Leaderboard</button>
-        <button id="goToRegisterPageButton">Register</button>
-        <p id="score"></p>
-        <button onclick="login()" id="loginButton">Login</button>
-        <button onclick="logout()" id="logoutButton">Logout</button>
-    </div>
+        <!-- Div para o menu de jogo -->
+        <div id="playMenu">
+            <!-- Botão para iniciar o jogo -->
+            <button id="startGameButton"><img src="../public/styles/Assets/PLAY.png" alt=""></button>
 
-    <div id="leaderboard" style="display: none;">
-        <button onclick="toggleLeaderboard()">Back</button>
-        <p>Leaderboard:</p>
-        <ul id="leaderboardList"></ul>
-    </div>
+            <!-- Botão para exibir/ocultar o leaderboard -->
+            <button onclick="toggleLeaderboard()"><img src="../public/styles/Assets/Leaderboard.png" alt="" id="leaderBoardImage"></button>
 
+            <!-- Botão para ir para a página de registro -->
+            <button id="goToRegisterPageButton"><img src="../public/styles/Assets/Register_Button.png" alt=""></button>
+
+            <!-- Parágrafo para exibir a pontuação -->
+            <p id="score"></p>
+
+            <!-- Botões de login e logout -->
+            <button onclick="login()" id="loginButton"><img src="../public/styles/Assets/Login.png" alt=""></button>
+            <button onclick="logout()" id="logoutButton"><img src="../public/styles/Assets/Logout.png" alt=""></button>
+        </div>
+
+        <!-- Div para exibir o leaderboard -->
+        <div id="leaderboard" style="display: none;">
+            <!-- Botão para fechar o leaderboard -->
+            <button onclick="toggleLeaderboard()"><img src="../public/styles/Assets/Exit.png" alt="" id="buttonLeaderboard"></button>
+
+            <!-- Parágrafo indicando o leaderboard -->
+            <p>Leaderboard:</p>
+
+            <!-- Lista para exibir os itens do leaderboard -->
+            <ul id="leaderboardList"></ul>
+        </div>
+
+    </main>
+
+    <!-- Canvas para o jogo -->
     <canvas id="game"></canvas>
+
+    <!-- Canvas separado para o desenho da cobra -->
     <canvas id="snakeCanvas" width="400" height="400"></canvas>
 
+    <!-- Importando a biblioteca Axios para requisições HTTP -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Script principal para o jogo -->
     <script type="module" src="./js/main.js"></script>
+
+    <!-- Script para carregar o módulo principal após o carregamento do DOM -->
     <script type="module">
         document.addEventListener("DOMContentLoaded", async function () {
+            // Importando funções específicas do módulo principal
             const module = await import('./js/main.js');
             const { startGame, toggleLeaderboard, goToRegisterPage, goToLoginPage, logout } = module;
 
-            // Adicione event listeners aos botões
+            // Adicionando event listeners aos botões
             document.getElementById('startGameButton').addEventListener('click', startGame);
             window.toggleLeaderboard = toggleLeaderboard
             window.login = goToLoginPage

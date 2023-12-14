@@ -2,42 +2,69 @@
 <html lang="en">
 
 <head>
+    <!-- Definindo o conjunto de caracteres e a viewport para responsividade -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Importando a fonte Poppins do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
+    
+    <!-- Importando o arquivo de estilo personalizado para a página de registro -->
+    <link rel="stylesheet" href="./styles/register.css">
+
+    <!-- Título da página -->
     <title>Cadastro</title>
 </head>
 
 <body>
-    <h1>Pagina de registro</h1>
-
+   
+    <!-- Formulário de registro -->
     <form method="post">
+        <!-- Título do formulário -->
+        <h1>Create your account</h1>
+
+        <!-- Campo de entrada para o nome de usuário -->
         <div class="username">
-            <label for="username">Username:</label>
+            <label for="username">Username</label>
             <input id="username" type="text">
         </div>
 
+        <!-- Campo de entrada para a senha -->
         <div class="password">
-            <label for="password">Senha:</label>
+            <label for="password">Password</label>
             <input id="password" type="text">
         </div>
 
+        <!-- Botão de envio do formulário de registro -->
         <button id="registerButton">Cadastrar</button>
     </form>
 
+    <!-- Importando a biblioteca Axios para requisições HTTP -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Script principal para o jogo -->
     <script type="module" src="./js/main.js"></script>
+
+    <!-- Script para carregar o módulo de serviço de registro após o carregamento do DOM -->
     <script type="module">
         document.addEventListener("DOMContentLoaded", async function () {
+            // Importando funções específicas do módulo de serviço de registro
             const module = await import('./js/services/register.js');
-            const { register } = module
-            window.register = register
+            const { register } = module;
 
+            // Expondo a função de registro globalmente para ser acessada a partir de outros scripts
+            window.register = register;
+
+            // Adicionando um event listener ao botão de registro usando o método de clique
             document.getElementById('registerButton').addEventListener('click', async function () {
-                event.preventDefault()
-                
+                // Prevenindo o comportamento padrão do formulário para evitar recarregar a página
+                event.preventDefault();
+
+                // Obtendo os valores de nome de usuário e senha dos campos de entrada
                 const username = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
 
+                // Chamando a função de registro com os dados fornecidos
                 await register(username, password);
             });
         });
