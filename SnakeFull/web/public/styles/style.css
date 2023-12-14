@@ -24,7 +24,7 @@ body {
   min-height: 100vh;
 
   /* Imagem de fundo para o corpo do documento */
-  background-image: url(../../public/styles/Assets/Snake_Game_BG.png);
+  background-image: url(/styles/assets/Snake_Game_BG.png);
   background-size: 100%;
   background-repeat: no-repeat;
 
@@ -139,5 +139,5 @@ main {
 
 /* Estilo específico para o botão de iniciar o jogo com uma imagem de fundo */
 #startGameButton {
-  background-image: url(./Assets/PLAY.png);
+  background-image: url(./assets/PLAY.png);
 }

@@ -18,7 +18,7 @@
   /* Estilo do corpo do documento */
   body {
     font-size: 1.6rem; /* Tamanho padrão da fonte */
-    background-image: url(./Assets/background.png); /* Imagem de fundo para o corpo do documento */
+    background-image: url(/styles/assets/background.png); /* Imagem de fundo para o corpo do documento */
     display: grid;
     place-content: center;
     min-height: 100vh;
@@ -65,10 +65,11 @@
     display: grid;
   }
   
-  /* Estilo do botão de login */
-  #login {
+  /* Estilo do botão de registro */
+  #registerButton {
     color: #fff; /* Cor do texto branco */
     text-align: center;
+    font-family: Poppins;
     font-size: 1.6rem;
     font-weight: 800;
     background: #40DE63; /* Cor de fundo verde */
@@ -81,8 +82,8 @@
     transition: all 0.2s ease-in-out; /* Transição suave de propriedades */
   }
   
-  /* Estilo do botão de login ao passar o mouse sobre ele */
-  #login:hover {
+  /* Estilo do botão de registro ao passar o mouse sobre ele */
+  #registerButton:hover {
     background: #1eb63f; /* Cor de fundo alterada ao passar o mouse */
   }
   

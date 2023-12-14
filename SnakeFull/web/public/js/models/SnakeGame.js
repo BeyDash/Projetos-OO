@@ -167,6 +167,7 @@ export class SnakeGame {
         top10.forEach(user => {
             const li = document.createElement("li");
             li.textContent = `${user.username} - ${user.score}`;
+            li.style.color = 'white'
 
             leaderboardList.appendChild(li);
         });

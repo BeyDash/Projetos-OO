@@ -30,5 +30,17 @@
   {
     "username": "sara",
     "score": 3
+  },
+  {
+    "username": "",
+    "score": 2
+  },
+  {
+    "username": null,
+    "score": 1
+  },
+  {
+    "username": "sara1",
+    "score": 2
   }
 ]
