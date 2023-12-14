@@ -1,16 +1,7 @@
 [
   {
-    "username": "banana",
+    "username": "test",
     "password": "1234",
-    "score": 2
-  },
-  {
-    "username": "sara",
-    "password": "12",
-    "score": 3
-  },
-  {
-    "username": "sara1",
-    "password": "12"
+    "score": 0
   }
 ]
