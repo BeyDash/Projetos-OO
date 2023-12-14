@@ -1,29 +1,123 @@
-body {
-    background-color: #FFF; /* Cor de fundo para o restante da página (branco, no exemplo) */
-    margin: 0;
-    overflow: hidden; /* Isso impede que a barra de rolagem apareça quando a tela é pequena */
-}
-#title, #playMenu {
-    text-align: center;
-    margin: 0 auto;
-    display: block;
-  }
-  
-  #game {
-    display: block;
-    margin: 0 auto;
-  }
-  #leaderboard{
-    margin: 0 auto;
-    display: block;
-  }
-  
-#snakeCanvas {
-    background-color: #000; /* Cor desejada para a área do jogo (preto, no exemplo) */
-    display: none;
-    margin: 0 auto; /* Isso centraliza o canvas na página, se necessário */
+/* Reset de margens, preenchimentos e modelagem de caixa para todos os elementos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Definindo a unidade de fonte base para facilitar cálculos de tamanhos em rem */
+:root {
+  font-size: 62.5%;
+}
+
+/* Definindo a fonte padrão para o corpo do documento, inputs e botões */
+body, input, button {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Estilo do corpo do documento */
+body {
+  font-size: 1.6rem; /* Tamanho padrão da fonte */
+  background-color: #fff; /* Cor de fundo para o restante da página (branco, no exemplo) */
+  margin: 0;
+  overflow: hidden; /* Isso impede que a barra de rolagem apareça quando a tela é pequena */
+  min-height: 100vh;
+
+  /* Imagem de fundo para o corpo do documento */
+  background-image: url(../../public/styles/Assets/Snake_Game_BG.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+
+  /* Centraliza o conteúdo na tela usando grid  */
+  display: grid;
+  place-content: center;
+}
+
+/* Estilo da seção principal */
+main {
+  width: 600px;
+  margin-top: -17rem; /* Desloca para cima para posicionar na tela */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo do título */
+#title {
+  margin: 0 auto;
+}
+
+/* Estilo da imagem do título */
+#title img {
+  width: 50rem;
+}
+
+/* Estilo do menu de jogo */
+#playMenu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: 3rem;
+}
+
+/* Estilo do botão do menu de jogo e leaderboard */
+#playMenu button, #leaderboard button {
+  background: none;
+  border: none;
+}
+
+/* Estilo da imagem dentro do botão do menu de jogo */
+#playMenu button img {
+  width: 17rem;
+}
+
+/* Estilo específico para a imagem do leaderboard */
+#leaderBoardImage {
+  width: 18rem !important; /* Largura do leaderboard com !important para priorizar */
+}
+
+/* Estilo do botão do leaderboard */
+#buttonLeaderboard {
+  width: 10rem;
+}
+
+/* Estilo do parágrafo dentro do leaderboard */
+#leaderboard p {
+  color: #ffffff; /* Cor do texto branco */
+  font-size: 2rem;
+}
+
+/* Estilo do canvas do jogo */
+#snakeCanvas {
+  border-radius: 20px;
+  border: 2px solid #24fb0d; /* Borda verde para o canvas do jogo */
+}
+
+/* Estilo do canvas e de algumas seções, centralizando e ajustando a aparência se necessário */
+/*#title,
+#playMenu {
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+#game {
+  display: block;
+  margin: 0 auto;
+}
+
+#leaderboard {
+  margin: 0 auto;
+  display: block;
+} */
+
+/* Estilo específico para a área do jogo com fundo preto */
+#snakeCanvas {
+  background-color: #000; /* Cor desejada para a área do jogo (preto, no exemplo) */
+  display: none; /* Inicialmente oculto */
+  margin: 0 auto; /* Isso centraliza o canvas na página, se necessário */
+}
+
+/* Estilo do loader, um componente visual para indicar carregamento */
 #loader {
   display: none;
   position: fixed;
@@ -31,13 +125,19 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco transparente para o loader */
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 1000; /* Z-index elevado para garantir que esteja acima de outros elementos */
 }
 
+/* Estilo da imagem dentro do loader */
 #loader img {
-  width: 50px; /* Adjust the size of the loader image */
-  height: 50px; /* Adjust the size of the loader image */
+  width: 50px; /* Ajusta o tamanho da imagem do loader */
+  height: 50px; /* Ajusta o tamanho da imagem do loader */
+}
+
+/* Estilo específico para o botão de iniciar o jogo com uma imagem de fundo */
+#startGameButton {
+  background-image: url(./Assets/PLAY.png);
 }
