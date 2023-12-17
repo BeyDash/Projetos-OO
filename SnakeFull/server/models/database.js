@@ -63,9 +63,6 @@ export default class Database {
     // throw new Error('Impossible to update user, it was not found in the database');
   }
   
-
-
-  // TODO: Work on it latter
   delete(username) {
     // Find the index of the user by username
     const userIndexToDelete = this.data.findIndex((user) => user.username === username);

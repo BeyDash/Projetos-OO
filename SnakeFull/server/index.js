@@ -18,11 +18,7 @@ app.post('/register', (req, res) => {
         register.register(username, password)
         return res.status(200).send("Succesfully registered")
     } catch (error) {
-        // TODO: CHeck if it should be 400
         return res.status(400).send(error.message)
-
-        // TODO: Receber esse erro no front e trata-lo redirecionanado para
-        // para pag de cadastro e chamando a rota de novo
     }
 })
 
@@ -43,7 +39,6 @@ app.put('/update-score', (req, res) => {
         return res.status(200).send(JSON.stringify(answer))
     } catch (error) {
         console.log(error);
-        // TODO: CHECK IF IT SHOULD BE 400
         return res.status(400).send(error.message)
     }
 })
@@ -79,7 +74,6 @@ app.post('/login', (req, res) => {
             message: "User successfully logged in"
         }))
     } catch (error) {
-        // TODO: CHECK IF IT SHOULD BE 400
         return res.status(404).send({
             message: error.message
         })

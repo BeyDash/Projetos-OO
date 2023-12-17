@@ -1,5 +1,8 @@
 # Instruções para Executar o Projeto
 
+## VÍDEO EXPLICATIVO DO PROJETO:
+- https://youtu.be/W44d6XWv-V4
+
 ## Pré requisitos para conseguir rodar os comandos a seguir
 - [Node.js](https://nodejs.org/en/download/)
 - npm (geralmente já vem junto na instalação do node)
